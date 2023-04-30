@@ -9,10 +9,11 @@ import Test_Files_and_helper_functions.picToCornerCoords as picToCornerCoords
 
 SHUTDOWN = False
 REPEAT_TIMES =10
-DUNGEON = "giants"
+DUNGEON = "dragons"
+PROFILE = "laptop 2"
 
-TIMES = {"now": (1,2), "faimon": (300,310), "giants": (650, 730), "necro": (848,900)}
-
+TIMES = {"now": (1,2), "faimon": (300,310), "giants": (650, 730), "necro": (848,900), "dragons": (750,800)}
+PROFILES = {"laptop 2" : "mumu player", "laptop 1" : "google play games"}
 
 #TODO -> implement the img detection AS IT POPS UP, not at start of program. AGH
 # REPEAT_BATTLE = picToCornerCoords.picToCornerCoordsMediumRes("images\9x10repeat_battle.png") 
@@ -145,8 +146,10 @@ clickTypes = [tap, dragClick, holdClick]
 
 if __name__ == '__main__':
 
-    
-    changeWindows("Summoners War")
+    if PROFILES[PROFILE] == "mumu player":
+        changeWindows("Summoners War - Mumu Player")
+    if PROFILES[PROFILE] == "google play games":
+        changeWindows("Summoners War")
     time.sleep(4)
     for i in range(REPEAT_TIMES):
         print("iteration ", i)
