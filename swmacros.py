@@ -7,23 +7,24 @@ import Test_Files_and_helper_functions.detection as detection
 import os
 import Test_Files_and_helper_functions.picToCornerCoords as picToCornerCoords
 
-SHUTDOWN = False
-REPEAT_TIMES =10
-DUNGEON = "dragons"
+SHUTDOWN = True
+REPEAT_TIMES =9
+DUNGEON = "dhSacreon"
 PROFILE = "laptop 2"
+DIMENSIONAL_HOLE_REPEAT = True
 
-TIMES = {"now": (1,2), "faimon": (300,310), "giants": (650, 730), "necro": (848,900), "dragons": (750,800)}
-PROFILES = {"laptop 2" : "mumu player", "laptop 1" : "google play games"}
+TIMES = {"now": (1,2), "faimon": (300,310), "giants": (650, 730), "necro": (848,900), "dragons": (520,540), "dhSacreon": (2400,2500)}
+PROFILES = {"laptop 2" : "mumu player", "laptop 1" : "google play games"} 
 
 #TODO -> implement the img detection AS IT POPS UP, not at start of program. AGH
-# REPEAT_BATTLE = picToCornerCoords.picToCornerCoordsMediumRes("images\9x10repeat_battle.png") 
-# REPLAY_BOUNDS = picToCornerCoords.picToCornerCoordsMediumRes("images\\replay.png") 
-# SELL_SELECTED1_BOUNDS = picToCornerCoords.picToCornerCoordsMediumRes("images\sell_selected_1.png") 
-# SELL_SELECTED2_BOUNDS= picToCornerCoords.picToCornerCoordsMediumRes("images\sell_selected_2.png") 
-# YES_SELL_BOUNDS= picToCornerCoords.picToCornerCoordsMediumRes("images\sell_selected_yes.png") 
-# OK_SELL_BOUNDS= picToCornerCoords.picToCornerCoordsMediumRes("images\sell_selected_fail_ok.png") 
-# CANCEL_SELL_BOUNDS= picToCornerCoords.picToCornerCoordsMediumRes("images\sell_selected_cancel.png") 
-# LEGENDARY_YES_SELL = picToCornerCoords.picToCornerCoordsMediumRes("images\legend_rune_yes.png")
+# REPEAT_BATTLE = picToCornerCoords.picToCornerCoordsMediumRes("images\9x10repeat_battleNEW.png") 
+# REPLAY_BOUNDS = picToCornerCoords.picToCornerCoordsMediumRes("images\\replayNEW.png") 
+# SELL_SELECTED1_BOUNDS = picToCornerCoords.picToCornerCoordsMediumRes("images\sell_selected_1NEW.png") 
+# SELL_SELECTED2_BOUNDS= picToCornerCoords.picToCornerCoordsMediumRes("images\sell_selected_2NEW.png") 
+# YES_SELL_BOUNDS= picToCornerCoords.picToCornerCoordsMediumRes("images\sell_selected_yesNEW.png") 
+# OK_SELL_BOUNDS= picToCornerCoords.picToCornerCoordsMediumRes("images\sell_selected_fail_okNEW.png") 
+# CANCEL_SELL_BOUNDS= picToCornerCoords.picToCornerCoordsMediumRes("images\sell_selected_cancelNEW.png") 
+# LEGENDARY_YES_SELL = picToCornerCoords.picToCornerCoordsMediumRes("images\legend_rune_yesNEW.png")
 
 
 #HARD CODED VALUES, REPLACE ONCE IMAGE RECOGNITION
@@ -154,7 +155,9 @@ if __name__ == '__main__':
     for i in range(REPEAT_TIMES):
         print("iteration ", i)
         print("repeat press")
-        REPEAT_BATTLE = picToCornerCoords.picToCornerCoordsMediumRes("images\9x10repeat_battle.png") 
+        if DIMENSIONAL_HOLE_REPEAT == False:
+            REPEAT_BATTLE = picToCornerCoords.picToCornerCoordsMediumRes("images\9x10repeat_battleNEW.png") 
+        else: REPEAT_BATTLE = picToCornerCoords.picToCornerCoordsMediumRes("images\9x10repeat_battle_DH_NEW.png")
         time.sleep(random.randint(2,3))
         randomClickType = random.choice(clickTypes)
         randomClickType(randomPointWithinRect(REPEAT_BATTLE))
@@ -163,40 +166,40 @@ if __name__ == '__main__':
         #error when on second display????
         time.sleep(3)
         print("sell 1 press")
-        SELL_SELECTED1_BOUNDS = picToCornerCoords.picToCornerCoordsMediumRes("images\sell_selected_1.png") 
+        SELL_SELECTED1_BOUNDS = picToCornerCoords.picToCornerCoordsMediumRes("images\sell_selected_1NEW.png") 
         randomClickType = random.choice(clickTypes)
         randomClickType(randomPointWithinRect(SELL_SELECTED1_BOUNDS))
         time.sleep(random.uniform(2, 3))
         print("sell 2 press")
-        SELL_SELECTED2_BOUNDS= picToCornerCoords.picToCornerCoordsMediumRes("images\sell_selected_2.png") 
+        SELL_SELECTED2_BOUNDS= picToCornerCoords.picToCornerCoordsMediumRes("images\sell_selected_2NEW.png") 
         randomClickType = random.choice(clickTypes)
         randomClickType(randomPointWithinRect(SELL_SELECTED2_BOUNDS))
         time.sleep(random.uniform(4, 9))
 
         if detection.noItemsToSell():
             print("ok press")
-            OK_SELL_BOUNDS= picToCornerCoords.picToCornerCoordsMediumRes("images\sell_selected_fail_ok.png") 
+            OK_SELL_BOUNDS= picToCornerCoords.picToCornerCoordsMediumRes("images\sell_selected_fail_okNEW.png") 
             randomClickType = random.choice(clickTypes)
             randomClickType(randomPointWithinRect(OK_SELL_BOUNDS))
             time.sleep(random.uniform(1,2))
             print("cancel press")
-            CANCEL_SELL_BOUNDS= picToCornerCoords.picToCornerCoordsMediumRes("images\sell_selected_cancel.png") 
+            CANCEL_SELL_BOUNDS= picToCornerCoords.picToCornerCoordsMediumRes("images\sell_selected_cancelNEW.png") 
             randomClickType = random.choice(clickTypes)
             randomClickType(randomPointWithinRect(CANCEL_SELL_BOUNDS))       
         else:
             print("yes press")
-            YES_SELL_BOUNDS= picToCornerCoords.picToCornerCoordsMediumRes("images\sell_selected_yes.png") 
+            YES_SELL_BOUNDS= picToCornerCoords.picToCornerCoordsMediumRes("images\sell_selected_yesNEW.png") 
             randomClickType = random.choice(clickTypes)
             randomClickType(randomPointWithinRect(YES_SELL_BOUNDS))   
             time.sleep(1)
             if detection.legendaryFlatSellConfirm():
                 print("legendary sell")
-                LEGENDARY_YES_SELL = picToCornerCoords.picToCornerCoordsMediumRes("images\legend_rune_yes.png")
+                LEGENDARY_YES_SELL = picToCornerCoords.picToCornerCoordsMediumRes("images\legend_rune_yesNEW.png")
                 randomClickType = random.choice(clickTypes)
                 randomClickType(randomPointWithinRect(LEGENDARY_YES_SELL))   
         time.sleep(random.uniform(3, 5))
         print("replay press")
-        REPLAY_BOUNDS = picToCornerCoords.picToCornerCoordsMediumRes("images\\replay.png") 
+        REPLAY_BOUNDS = picToCornerCoords.picToCornerCoordsMediumRes("images\\replayNEW.png") 
         randomClickType = random.choice(clickTypes)
         randomClickType(randomPointWithinRect(REPLAY_BOUNDS))
         time.sleep(random.uniform(2, 4))

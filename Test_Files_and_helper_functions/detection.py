@@ -12,7 +12,7 @@ def noItemsToSell():
 
 #TODO get legendary confirm image path
 def legendaryFlatSellConfirm():
-    legendaryFlatSellConfirm = pyautogui.locateOnScreen("images\legend_rune_sell.png", confidence= 0.7)
+    legendaryFlatSellConfirm = pyautogui.locateOnScreen("images\legend_rune_sellNEW.png", confidence= 0.7)
     return legendaryFlatSellConfirm != None
 
 
@@ -31,3 +31,10 @@ def splitTimesAndCheckDefeated(timeRange):
     return
         
         
+def detectImageTest():
+    time.sleep(2)
+    coords = pyautogui.locateOnScreen("images\legend_rune_yesNEW.png", confidence= 0.7)
+    print(coords)
+    return
+
+detectImageTest()
